@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "257319088130",
+    "project_id": "syncoplan-66",
+    "storage_bucket": "syncoplan-66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257319088130:android:80a2c19128ea157752371b",
+        "android_client_info": {
+          "package_name": "com.example.syncoplan_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257319088130-gje1i8iddodne0v0oi5opcjkpte4rc7d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.syncoplan_project",
+            "certificate_hash": "e17b58a68a60accb0d280946d20db719645690ea"
+          }
+        },
+        {
+          "client_id": "257319088130-0njnbos9q46fto5cnulkfumg1stoh5m7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYzOIvIdwJ__R18Q2-bYgqXs8KZh4ahg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257319088130-0njnbos9q46fto5cnulkfumg1stoh5m7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "257319088130-oau0e78lbrp1nkvcpfird9rnh0b4csal.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.syncoplanProject"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
