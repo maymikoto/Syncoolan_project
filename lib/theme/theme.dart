@@ -21,6 +21,9 @@ class Apptheme {
         scaffoldBackgroundColor: Apptheme.backgroundColor,
         fontFamily: GoogleFonts.notoSansThai().fontFamily,
         hintColor: Colors.black45,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.black87,
+          titleTextStyle: TextStyle(fontSize: 18)),
         textTheme: const TextTheme(
           titleLarge: TextStyle(
             fontSize: 32,
