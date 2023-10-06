@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:syncoplan_project/core/constants/constants.dart';
 import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/util.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';

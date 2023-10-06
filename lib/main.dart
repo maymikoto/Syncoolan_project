@@ -8,7 +8,6 @@ import 'package:syncoplan_project/core/route.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
-import 'package:syncoplan_project/features/auth/screens/loginscreen.dart';
 import 'package:syncoplan_project/firebase_options.dart';
 import 'package:syncoplan_project/theme/theme.dart';
 

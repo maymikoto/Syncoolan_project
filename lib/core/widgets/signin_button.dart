@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/core/constants/constants.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
-import 'package:syncoplan_project/theme/theme.dart';
+
 
 class SignInButton extends ConsumerWidget{
   const SignInButton({super.key});

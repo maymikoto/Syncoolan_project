@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:syncoplan_project/core/constants/constants.dart';
 import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
