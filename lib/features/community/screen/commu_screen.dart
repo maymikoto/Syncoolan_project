@@ -3,12 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
 import 'package:syncoplan_project/features/community/delegates/search_community_delegate.dart';
 import 'package:syncoplan_project/features/community/drawer/commu_list_drawer.dart';
+import 'package:syncoplan_project/features/community/drawer/profile_drawer.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
 void displayDrawer(BuildContext context){
   Scaffold.of(context).openDrawer();
+}
+
+void displayEndDrawer(BuildContext context){
+  Scaffold.of(context).openEndDrawer();
 }
 
   @override
@@ -30,13 +35,18 @@ void displayDrawer(BuildContext context){
             icon:Icon(Icons.search),
             onPressed: () {showSearch(context: context, delegate: SearchCommunityDelegate(ref));},
           ),          
-          IconButton(
-            icon: CircleAvatar(backgroundImage: NetworkImage(user.profilePic)),
-            onPressed: () {},
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: CircleAvatar(backgroundImage: NetworkImage(user.profilePic)),
+                onPressed: () => displayEndDrawer(context),
+              );
+            }
           )
         ],
       ),
       drawer: CommuListDrawer(),
+      endDrawer: ProfileDrawer(),
       );
   }
 }

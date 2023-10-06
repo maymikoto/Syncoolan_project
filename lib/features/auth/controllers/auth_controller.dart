@@ -49,4 +49,7 @@ void signInWithGoogle(BuildContext context) async{
     return _authRepository.getUserData(uid);
   }
 
+  void logOut(){
+    _authRepository.logOut();
+  }
 }
