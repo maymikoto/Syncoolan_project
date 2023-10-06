@@ -49,7 +49,7 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
                     TextField(
                       controller: communityNameController,
                       decoration: const InputDecoration(
-                        hintText: 'r/Community_name',
+                        hintText: 'Enter community name',
                         filled: true,
                         border: InputBorder.none,
                         contentPadding: EdgeInsets.all(18),
