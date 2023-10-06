@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:syncoplan_project/theme/theme.dart';
 
 class CustomTextButton extends StatelessWidget {
   final Function() onTap;
