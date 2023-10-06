@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
+import 'package:syncoplan_project/features/community/delegates/search_community_delegate.dart';
 import 'package:syncoplan_project/features/community/drawer/commu_list_drawer.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -27,7 +28,7 @@ void displayDrawer(BuildContext context){
         actions: [
           IconButton(
             icon:Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {showSearch(context: context, delegate: SearchCommunityDelegate(ref));},
           ),          
           IconButton(
             icon: CircleAvatar(backgroundImage: NetworkImage(user.profilePic)),
