@@ -22,11 +22,12 @@ class Apptheme {
         fontFamily: GoogleFonts.notoSansThai().fontFamily,
         hintColor: Colors.black45,
         appBarTheme: const AppBarTheme(
+
           backgroundColor: Colors.black87,
           titleTextStyle: TextStyle(fontSize: 18)),
         textTheme: const TextTheme(
           titleLarge: TextStyle(
-            fontSize: 32,
+            fontSize: 18,
             fontWeight: FontWeight.w900,
             color: Colors.black,
           ),
@@ -49,3 +50,11 @@ class Apptheme {
         );
   }
 }
+
+// -----------  Other TextStyle --------------------
+
+TextStyle textButtonStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.w900,
+  color: Colors.blue.shade500,
+);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
@@ -8,6 +9,11 @@ import 'package:syncoplan_project/features/community/controllers/commu_controlle
 class CommunityScreen extends ConsumerWidget {
   final String name;
   const CommunityScreen({required this.name, super.key});
+
+  void navigateToModTools(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools/$name');
+  }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +57,7 @@ class CommunityScreen extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'r/${community.name}',
+                                community.name,
                                 style: const TextStyle(
                                   fontSize: 19,
                                   fontWeight: FontWeight.bold,
@@ -60,6 +66,7 @@ class CommunityScreen extends ConsumerWidget {
                                 community.mods.contains(user.uid)
                                     ? OutlinedButton(
                                         onPressed: () {
+                                          navigateToModTools(context);
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
