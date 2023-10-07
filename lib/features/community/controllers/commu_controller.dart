@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/core/constants/constants.dart';
+import 'package:syncoplan_project/core/failure.dart';
 import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/providers/storage_repository_provider.dart';
 import 'package:syncoplan_project/core/util.dart';
@@ -132,11 +134,30 @@ void editCommunity({
     (l) => showSnackBar(context, l.message),
     (r) => Routemaster.of(context).pop(),
   );
+}
+
+  void joinCommunity(Community community, BuildContext context) async{
+    final user = _ref.read(userProvider)!;
+
+    Either<Failure, void> res;
+    if (community.members.contains(user.uid)) {
+      res = await _communityRepository.leaveCommunity(community.name, user.uid);
+    } else {
+      res = await _communityRepository.joinCommunity(community.name, user.uid);
+    }
+
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      if (community.members.contains(user.uid)) {
+        showSnackBar(context, 'Community left successfully!');
+      } else {
+        showSnackBar(context, 'Community joined successfully!');
+      }
+    });
   }
+ 
    Stream<List<Community>> searchCommunity(String query) {
     return _communityRepository.searchCommunity(query);
   }
- 
 }
 
 

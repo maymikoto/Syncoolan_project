@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
@@ -14,6 +16,9 @@ class CommunityScreen extends ConsumerWidget {
     Routemaster.of(context).push('/mod-tools/$name');
   }
 
+  void joinCommunity(WidgetRef ref, Community community, BuildContext context) async {
+    ref.read(communityControllerProvider.notifier).joinCommunity(community, context);
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -77,14 +82,16 @@ class CommunityScreen extends ConsumerWidget {
                                         child: const Text('Mod Tools'),
                                       )
                                     : OutlinedButton(
-                                        onPressed: (){},
+                                        onPressed: () => joinCommunity(ref, community, context),
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(20),
                                           ),
                                           padding: const EdgeInsets.symmetric(horizontal: 25),
                                         ),
-                                        child: Text(community.members.contains(user.uid) ? 'Joined' : 'Join'),
+                                        child: Text(community.members.contains(user.uid) 
+                                        ? 'Joined' 
+                                        : 'Join'),
                                       ),
                             ],
                           ),

@@ -25,14 +25,14 @@ void displayEndDrawer(BuildContext context){
         centerTitle:false,
         leading: Builder(
           builder: (context) {
-            return IconButton(icon:Icon(Icons.menu),
+            return IconButton(icon:const Icon(Icons.menu),
             onPressed:() => displayDrawer(context), 
             );
           }
         ),
         actions: [
           IconButton(
-            icon:Icon(Icons.search),
+            icon:const Icon(Icons.search),
             onPressed: () {showSearch(context: context, delegate: SearchCommunityDelegate(ref));},
           ),          
           Builder(
@@ -45,8 +45,8 @@ void displayEndDrawer(BuildContext context){
           )
         ],
       ),
-      drawer: CommuListDrawer(),
-      endDrawer: ProfileDrawer(),
+      drawer: const CommuListDrawer(),
+      endDrawer: const ProfileDrawer(),
       );
   }
 }
