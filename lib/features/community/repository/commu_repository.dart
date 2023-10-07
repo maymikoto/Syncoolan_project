@@ -18,12 +18,15 @@ class CommunityRepository {
 
   FutureVoid createCommunity(Community community) async {
     try {
-      var communityDoc = await _communities.doc(community.name).get();
-      if (communityDoc.exists) {
-        throw 'Community with the same name already exists!';
-      }
+    final querySnapshot = await _communities
+        .where('name', isEqualTo: community.name)
+        .get();
 
-      return right(_communities.doc(community.name).set(community.toMap()));
+    if (querySnapshot.docs.isNotEmpty) {
+      throw 'Community with the same name already exists!';
+    }
+
+      return right(_communities.doc(community.id).set(community.toMap()));
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
@@ -31,9 +34,9 @@ class CommunityRepository {
     }
   }
   
-FutureVoid joinCommunity(String communityName,String userId) async{
+FutureVoid joinCommunity(String communityid,String userId) async{
       try {
-        return right( _communities.doc(communityName).update({
+        return right( _communities.doc(communityid).update({
           'members' : FieldValue.arrayUnion([userId]),
         }));
     } on FirebaseException catch (e) {
@@ -43,9 +46,9 @@ FutureVoid joinCommunity(String communityName,String userId) async{
     }  
 }
 
-FutureVoid leaveCommunity(String communityName,String userId) async{
+FutureVoid leaveCommunity(String communityId,String userId) async{
       try {
-        return right( _communities.doc(communityName).update({
+        return right( _communities.doc(communityId).update({
           'members' : FieldValue.arrayRemove([userId]),
         }));
     } on FirebaseException catch (e) {
@@ -65,13 +68,14 @@ Stream<List<Community>> getUserCommunities(String uid) {
     });
   }
 
-Stream<Community> getCommunityByName(String name) {
-    return _communities.doc(name).snapshots().map((event) => Community.fromMap(event.data() as Map<String, dynamic>));
+Stream<Community> getCommunityById(String id) {
+    return _communities.doc(id).snapshots().map((event) => Community.fromMap(event.data() as Map<String, dynamic>));
   }
+
 
   FutureVoid editCommunity(Community community) async{
     try{
-      return right( _communities.doc(community.name).update(community.toMap()));
+      return right( _communities.doc(community.id).update(community.toMap()));
     }on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
@@ -79,9 +83,9 @@ Stream<Community> getCommunityByName(String name) {
     }
   }
 
-  FutureVoid addMods(String communityName ,List<String> uids) async{
+  FutureVoid addMods(String communityId ,List<String> uids) async{
     try{
-      return right( _communities.doc(communityName).update({
+      return right( _communities.doc(communityId).update({
         'mods':uids,
       }));
     }on FirebaseException catch (e) {

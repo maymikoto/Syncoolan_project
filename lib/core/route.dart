@@ -16,22 +16,22 @@ final loggedOutRoute = RouteMap(routes: {
 final loggedInRoute = RouteMap(routes: {
   '/' : (_) => const MaterialPage(child: HomeScreen()),
   '/create-community': (_) => const MaterialPage(child: CreateCommunityScreen()),
-  '/r/:name': (route) => MaterialPage(
+  '/r/:id': (route) => MaterialPage(
       child: CommunityScreen(
-      name: route.pathParameters['name']!,
+      id: route.pathParameters['id']!,
         ),),
-    '/mod-tools/:name': (routeData) => MaterialPage(
+    '/mod-tools/:id': (routeData) => MaterialPage(
           child: ModToolsScreen(
-            name: routeData.pathParameters['name']!,
+            id: routeData.pathParameters['id']!,
           ),), 
-    '/edit-community/:name': (routeData) => MaterialPage(
+    '/edit-community/:id': (routeData) => MaterialPage(
           child: EditCommunityScreen(
-            name: routeData.pathParameters['name']!,
+            id: routeData.pathParameters['id']!,
           ),
         ),   
-    '/add-mods/:name': (routeData) => MaterialPage(
+    '/add-mods/:id': (routeData) => MaterialPage(
           child: AddModsScreen(
-            name: routeData.pathParameters['name']!,
+            id: routeData.pathParameters['id']!,
           ),
         ), 
     '/u/:uid': (routeData) => MaterialPage(

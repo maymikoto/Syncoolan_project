@@ -6,14 +6,14 @@ import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/util.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
-import 'package:syncoplan_project/core/widgets/long_button.dart';
+import 'package:syncoplan_project/core/widgets/button.dart';
 import 'package:syncoplan_project/core/widgets/text.button.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
 
 class EditCommunityScreen extends ConsumerStatefulWidget {
-  final String name;
+  final String id;
   const EditCommunityScreen({
-    required this.name,
+    required this.id,
     Key? key,
   }) : super(key: key);
 
@@ -60,7 +60,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
 
     final isLoading = ref.watch(communityControllerProvider);
 
-    return ref.watch(getCommunityByNameProvider(widget.name)).when(
+    return ref.watch(getCommunityByIdProvider(widget.id)).when(
           data: (community) => Scaffold(
             appBar: AppBar(
               title: const Text('Edit Community'),

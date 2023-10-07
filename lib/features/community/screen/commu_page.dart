@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
@@ -9,11 +8,11 @@ import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
 
 class CommunityScreen extends ConsumerWidget {
-  final String name;
-  const CommunityScreen({required this.name, super.key});
+  final String id;
+  const CommunityScreen({required this.id, super.key});
 
   void navigateToModTools(BuildContext context) {
-    Routemaster.of(context).push('/mod-tools/$name');
+    Routemaster.of(context).push('/mod-tools/$id');
   }
 
   void joinCommunity(WidgetRef ref, Community community, BuildContext context) async {
@@ -26,7 +25,7 @@ class CommunityScreen extends ConsumerWidget {
       final user = ref.watch(userProvider)!;
 
     return Scaffold(
-      body: ref.watch(getCommunityByNameProvider(name)).when(
+      body: ref.watch(getCommunityByIdProvider(id)).when(
         data:(community) => NestedScrollView(
              headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [

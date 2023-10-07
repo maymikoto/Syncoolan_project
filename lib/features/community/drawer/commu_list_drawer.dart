@@ -13,8 +13,8 @@ class CommuListDrawer extends ConsumerWidget {
     Routemaster.of(context).push('/create-community');
   }
 
-  void navigateToCommunity(BuildContext context,Community community) {
-    Routemaster.of(context).push('/r/${community.name}');
+  void navigateToCommunity(BuildContext context,String commuid) {
+    Routemaster.of(context).push('/r/$commuid');
   }
 
 
@@ -45,8 +45,8 @@ class CommuListDrawer extends ConsumerWidget {
                       final community = communities[index];
                       return ListTile(
                         leading: CircleAvatar(backgroundImage: NetworkImage(community.avatar)),
-                        title: Text('${community.name}'),
-                        onTap: () {navigateToCommunity(context, community);},
+                        title: Text(community.name),
+                        onTap: () {navigateToCommunity(context,community.id);},
                       );
                     } ),
                 ),   

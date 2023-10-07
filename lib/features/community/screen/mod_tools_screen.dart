@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
 class ModToolsScreen extends StatelessWidget {
-  final String name;
+  final String id;
   const ModToolsScreen({
     Key? key,
-    required this.name,
+    required this.id,
   }) : super(key: key);
 
   void navigateToModTools(BuildContext context) {
-    Routemaster.of(context).push('/edit-community/$name');
+    Routemaster.of(context).push('/edit-community/$id');
   }
   void navigateToAddMods(BuildContext context) {
-    Routemaster.of(context).push('/add-mods/$name');
+    Routemaster.of(context).push('/add-mods/$id');
   }
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 class Community {
   final String id;
@@ -8,13 +9,13 @@ class Community {
   final List<String> members;
   final List<String> mods;
   Community({
-    required this.id,
+    String? id, 
     required this.name,
     required this.banner,
     required this.avatar,
     required this.members,
     required this.mods,
-  });
+  }) : id = id ?? const Uuid().v4(); 
 
   Community copyWith({
     String? id,

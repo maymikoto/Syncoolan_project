@@ -8,6 +8,10 @@ import 'package:syncoplan_project/features/community/controllers/commu_controlle
 class SearchCommunityDelegate extends SearchDelegate {
   final WidgetRef ref;
   SearchCommunityDelegate(this.ref);
+  
+  void navigateToCommunity(BuildContext context,String commuid) {
+    Routemaster.of(context).push('/r/$commuid');
+  }
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -43,7 +47,7 @@ class SearchCommunityDelegate extends SearchDelegate {
                   backgroundImage: NetworkImage(community.avatar),
                 ),
                 title: Text(community.name),
-                onTap: () => navigateToCommunity(context, community.name),
+                onTap: () => navigateToCommunity(context, community.id),
               );
             },
           ),
@@ -52,9 +56,5 @@ class SearchCommunityDelegate extends SearchDelegate {
           ),
           loading: () => const Loader(),
         );
-  }
-
-  void navigateToCommunity(BuildContext context, String communityName) {
-    Routemaster.of(context).push('/r/$communityName');
   }
 }

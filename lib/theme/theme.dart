@@ -26,11 +26,16 @@ class Apptheme {
           backgroundColor: Colors.black87,
           titleTextStyle: TextStyle(fontSize: 18)),
         textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w900,
+          headlineLarge: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w800,
             color: Colors.black,
           ),
+          headlineMedium: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black45,
+          ),          
           displayLarge: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,

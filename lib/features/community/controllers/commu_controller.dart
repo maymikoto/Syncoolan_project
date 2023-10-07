@@ -28,8 +28,8 @@ final communityControllerProvider = StateNotifierProvider<CommunityController,bo
     );
 });
 
-final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
-  return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
+final getCommunityByIdProvider = StreamProvider.family((ref, String id) {
+  return ref.watch(communityControllerProvider.notifier).getCommunityById(id);
 });
 
 final searchCommunityProvider = StreamProvider.family((ref, String query) {
@@ -57,7 +57,6 @@ class CommunityController extends StateNotifier<bool>{
    final uid = _ref.read(userProvider)?.uid ?? '';
 
     Community community = Community(
-      id: name,
       name: name,
       banner: Constants.bannerDefault,
       avatar: Constants.avatarGroupDefault,
@@ -80,8 +79,8 @@ class CommunityController extends StateNotifier<bool>{
     return _communityRepository.getUserCommunities(uid);
   }
 
-  Stream<Community> getCommunityByName(String name) {
-    return _communityRepository.getCommunityByName(name); // Corrected method name
+  Stream<Community> getCommunityById(String id) {
+    return _communityRepository.getCommunityById(id); // Corrected method name
   }
 
 void editCommunity({
@@ -96,7 +95,7 @@ void editCommunity({
   if (profileFile != null) {
     final res = await _storageRepository.storeFile(
       path: 'communities/profile',
-      id: community.name,
+      id: community.id,
       file: profileFile,
     );
     res.fold(
@@ -112,7 +111,7 @@ void editCommunity({
   if (bannerFile != null) {
     final res = await _storageRepository.storeFile(
       path: 'communities/banner',
-      id: community.name,
+      id: community.id,
       file: bannerFile,
     );
     res.fold(
@@ -141,9 +140,9 @@ void editCommunity({
 
     Either<Failure, void> res;
     if (community.members.contains(user.uid)) {
-      res = await _communityRepository.leaveCommunity(community.name, user.uid);
+      res = await _communityRepository.leaveCommunity(community.id, user.uid);
     } else {
-      res = await _communityRepository.joinCommunity(community.name, user.uid);
+      res = await _communityRepository.joinCommunity(community.id, user.uid);
     }
 
     res.fold((l) => showErrorSnackBar(context, l.message), (r) {
@@ -159,8 +158,8 @@ void editCommunity({
     return _communityRepository.searchCommunity(query);
   }
 
-void addMods(String communityName ,List<String> uids,BuildContext context) async{
-  final res = await _communityRepository.addMods(communityName,uids);
+void addMods(String communityid ,List<String> uids,BuildContext context) async{
+  final res = await _communityRepository.addMods(communityid,uids);
   res.fold(
     (l) => showErrorSnackBar(context,l.message), 
     (r) => showSuccessSnackBar(context,'Mods updated successfully!'),);

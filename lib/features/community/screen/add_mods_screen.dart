@@ -6,10 +6,10 @@ import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
 
 class AddModsScreen extends ConsumerStatefulWidget {
-  final String name;
+  final String id;
   const AddModsScreen({
     Key? key,
-    required this.name,
+    required this.id,
   });
 
   @override
@@ -43,7 +43,7 @@ class _AddModsScreenState extends ConsumerState<AddModsScreen> {
 
   void saveMods() {
     ref.read(communityControllerProvider.notifier).addMods(
-          widget.name,
+          widget.id,
           uids.toList(),
           context,
         );
@@ -54,7 +54,7 @@ class _AddModsScreenState extends ConsumerState<AddModsScreen> {
     super.initState();
     // Load the initial mods into uids when the screen initializes
     ref
-        .read(getCommunityByNameProvider(widget.name))
+        .read(getCommunityByIdProvider(widget.id))
         .when(data: (community) {
       setState(() {
         uids.addAll(community.mods); // Add all mods to the selected mods set
@@ -76,7 +76,7 @@ class _AddModsScreenState extends ConsumerState<AddModsScreen> {
           ),
         ],
       ),
-      body: ref.watch(getCommunityByNameProvider(widget.name)).when(
+      body: ref.watch(getCommunityByIdProvider(widget.id)).when(
         data: (community) => ListView.builder(
           itemCount: community.members.length,
           itemBuilder: (BuildContext context, int index) {
