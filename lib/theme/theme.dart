@@ -22,19 +22,22 @@ class Apptheme {
         fontFamily: GoogleFonts.notoSansThai().fontFamily,
         hintColor: Colors.black45,
         appBarTheme: const AppBarTheme(
-
           backgroundColor: Colors.black87,
-          titleTextStyle: TextStyle(fontSize: 18)),
+          titleTextStyle: TextStyle(fontSize: 16),
+          iconTheme:IconThemeData(
+            color: Colors.white
+          )
+          ),
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w800,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
             color: Colors.black,
           ),
           headlineMedium: TextStyle(
-            fontSize: 20,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black45,
+            color: Colors.black87,
           ),          
           displayLarge: TextStyle(
             fontSize: 16,
@@ -66,4 +69,16 @@ TextStyle textButtonStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w900,
   color: Colors.blue.shade500,
+);
+
+TextStyle headline1 = const TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w500,
+  color: Color(0xFF272343),
+);
+
+TextStyle headline2 = const TextStyle(
+  fontSize: 10,
+  fontWeight: FontWeight.w500,
+  color: Color(0xFF2d334a),
 );

@@ -19,7 +19,7 @@ class ModToolsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:AppBar(
-        title:Text('Manage Group'),
+        title:const Text('Manage Group'),
         centerTitle: true,
       ),
       body:Column(children: [

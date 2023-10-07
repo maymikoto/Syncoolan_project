@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
-import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
 
 class CommuListDrawer extends ConsumerWidget {
-  const CommuListDrawer({Key? key});
+  const CommuListDrawer({super.key});
 
   void navigateToCreateCommunity(BuildContext context) {
     Routemaster.of(context).push('/create-community');
@@ -26,8 +25,8 @@ class CommuListDrawer extends ConsumerWidget {
           child: Column(
             children: [
               ListTile(
-                title: Text('Create a community'),
-                leading: Icon(Icons.add),
+                title: const Text('Create a community'),
+                leading: const Icon(Icons.add,color:Colors.black,),
                 onTap: () => navigateToCreateCommunity(context),
               ),
               ListTile(

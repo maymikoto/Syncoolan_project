@@ -29,7 +29,7 @@ class LoginScreen extends ConsumerWidget {
                 child: Image.asset(Constants.loginEmotePath,height:400,),
               ),
               const SizedBox(height: 30),
-              SignInButton()
+              const SignInButton()
           ],
         ),
       ),

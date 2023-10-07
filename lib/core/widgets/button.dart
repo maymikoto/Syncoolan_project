@@ -40,7 +40,7 @@ class CustomIconTextButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
 
-  CustomIconTextButton({
+  const CustomIconTextButton({
     super.key, 
     required this.text,
     required this.icon,
@@ -52,28 +52,30 @@ class CustomIconTextButton extends StatelessWidget {
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 61, 60, 60), // Background color
-          borderRadius: BorderRadius.circular(30.0), // Rounded corners
+          color: const Color.fromARGB(255, 61, 60, 60), // Background color
+          borderRadius: BorderRadius.circular(18.0), // Rounded corners
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              color: Colors.yellow.shade600,
-            ),
-            const SizedBox(width: 12.0), // Add spacing between icon and text
-            Text(
-              text,
-              style:  TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                color: Colors.yellow.shade600, // Text color
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: Colors.white,
               ),
-            ),
-          ],
+              const SizedBox(width: 12,),
+              Text(
+                text,
+                style:  const TextStyle(
+                  fontSize: 16,
+                  fontWeight:FontWeight.w400,
+                  color: Colors.white, // Text color
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

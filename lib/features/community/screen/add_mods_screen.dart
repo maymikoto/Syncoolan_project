@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
@@ -7,8 +9,7 @@ import 'package:syncoplan_project/features/community/controllers/commu_controlle
 
 class AddModsScreen extends ConsumerStatefulWidget {
   final String id;
-  const AddModsScreen({
-    Key? key,
+  const AddModsScreen({super.key, 
     required this.id,
   });
 

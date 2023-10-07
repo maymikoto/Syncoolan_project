@@ -19,7 +19,7 @@ void navigateToUserProfile(BuildContext context, String uid) {
     return SafeArea(
       child: Drawer(
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child:Column(children: [
             CircleAvatar(
               backgroundImage: NetworkImage(user.profilePic),
