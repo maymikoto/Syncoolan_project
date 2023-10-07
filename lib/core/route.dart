@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/features/auth/screens/loginscreen.dart';
+import 'package:syncoplan_project/features/community/screen/add_mods_screen.dart';
 import 'package:syncoplan_project/features/community/screen/commu_page.dart';
 import 'package:syncoplan_project/features/community/screen/commu_screen.dart';
 import 'package:syncoplan_project/features/community/screen/create_commu_screen.dart';
@@ -26,5 +27,10 @@ final loggedInRoute = RouteMap(routes: {
           child: EditCommunityScreen(
             name: routeData.pathParameters['name']!,
           ),
-        ),    
+        ),   
+    '/add-mods/:name': (routeData) => MaterialPage(
+          child: AddModsScreen(
+            name: routeData.pathParameters['name']!,
+          ),
+        ), 
 });

@@ -45,7 +45,11 @@ class Apptheme {
             fontWeight: FontWeight.w500,
             color: Colors.black54,
           ),
-      
+          displaySmall: TextStyle(      //For SnackBar
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),     
         ) //Button Text Style
         );
   }

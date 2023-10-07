@@ -68,9 +68,9 @@ class CommunityController extends StateNotifier<bool>{
    final res = await _communityRepository.createCommunity(community);  
    state = false;
   
-  res.fold((l) => showSnackBar(context,l.message), 
+  res.fold((l) => showErrorSnackBar(context,l.message), 
   (r) {
-    showSnackBar(context,'Community created successfuly!');
+    showSuccessSnackBar(context,'Community created successfuly!');
     Routemaster.of(context).pop();
     });
   }
@@ -100,7 +100,7 @@ void editCommunity({
       file: profileFile,
     );
     res.fold(
-      (l) => showSnackBar(context, l.message),
+      (l) => showErrorSnackBar(context, l.message),
       (r) {
         // Update the community's avatar URL
         community = community.copyWith(avatar: r);
@@ -116,7 +116,7 @@ void editCommunity({
       file: bannerFile,
     );
     res.fold(
-      (l) => showSnackBar(context, l.message),
+      (l) => showErrorSnackBar(context, l.message),
       (r) {
         // Update the community's banner URL
         community = community.copyWith(banner: r);
@@ -131,8 +131,8 @@ void editCommunity({
   state = false;
   
   res.fold(
-    (l) => showSnackBar(context, l.message),
-    (r) => Routemaster.of(context).pop(),
+    (l) => showErrorSnackBar(context, l.message),
+    (r) => showSuccessSnackBar(context,'Your edited community profile has been successfully saved.'),
   );
 }
 
@@ -146,11 +146,11 @@ void editCommunity({
       res = await _communityRepository.joinCommunity(community.name, user.uid);
     }
 
-    res.fold((l) => showSnackBar(context, l.message), (r) {
+    res.fold((l) => showErrorSnackBar(context, l.message), (r) {
       if (community.members.contains(user.uid)) {
-        showSnackBar(context, 'Community left successfully!');
+        showSuccessSnackBar(context, 'Community left successfully!');
       } else {
-        showSnackBar(context, 'Community joined successfully!');
+        showSuccessSnackBar(context, 'Community joined successfully!');
       }
     });
   }
@@ -158,6 +158,15 @@ void editCommunity({
    Stream<List<Community>> searchCommunity(String query) {
     return _communityRepository.searchCommunity(query);
   }
+
+void addMods(String communityName ,List<String> uids,BuildContext context) async{
+  final res = await _communityRepository.addMods(communityName,uids);
+  res.fold(
+    (l) => showErrorSnackBar(context,l.message), 
+    (r) => showSuccessSnackBar(context,'Mods updated successfully!'),);
+}
+
+
 }
 
 

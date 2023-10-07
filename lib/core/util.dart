@@ -1,12 +1,28 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-void showSnackBar(BuildContext context, String text) {
+void showSuccessSnackBar(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(
       SnackBar(
-        content: Text(text),
+        backgroundColor: Colors.green.shade600,
+        
+        content: Text(text,
+        style:Theme.of(context).textTheme.displaySmall ,),
+      ),
+    );
+}
+
+void showErrorSnackBar(BuildContext context, String text) {
+  ScaffoldMessenger.of(context)
+    ..hideCurrentSnackBar()
+    ..showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red.shade600,
+        
+        content: Text(text,
+        style:Theme.of(context).textTheme.displaySmall ,),
       ),
     );
 }
