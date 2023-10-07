@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
 
 class ProfileDrawer extends ConsumerWidget {
@@ -9,7 +10,9 @@ class ProfileDrawer extends ConsumerWidget {
 void logOut(WidgetRef ref){
   ref.read(AuthControllerProvider.notifier).logOut();
 }
-
+void navigateToUserProfile(BuildContext context, String uid) {
+    Routemaster.of(context).push('/u/$uid');
+  }
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -29,7 +32,7 @@ void logOut(WidgetRef ref){
             ListTile(
                 title: const Text('My Profile'),
                 leading: const Icon(Icons.person,color: Colors.black,),
-                onTap: () {},
+                onTap:() => navigateToUserProfile(context, user.uid),
            ),
             ListTile(
                 title: const Text('Log Out'),

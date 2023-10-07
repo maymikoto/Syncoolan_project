@@ -7,6 +7,7 @@ import 'package:syncoplan_project/features/community/screen/commu_screen.dart';
 import 'package:syncoplan_project/features/community/screen/create_commu_screen.dart';
 import 'package:syncoplan_project/features/community/screen/edit_commu.dart';
 import 'package:syncoplan_project/features/community/screen/mod_tools_screen.dart';
+import 'package:syncoplan_project/features/user_profile/screens/user_profile_screen.dart';
 
 final loggedOutRoute = RouteMap(routes: {
   '/' : (_) => const MaterialPage(child: LoginScreen())
@@ -33,4 +34,9 @@ final loggedInRoute = RouteMap(routes: {
             name: routeData.pathParameters['name']!,
           ),
         ), 
+    '/u/:uid': (routeData) => MaterialPage(
+          child: UserProfileScreen(
+            uid: routeData.pathParameters['uid']!,
+          ),
+        ),
 });
