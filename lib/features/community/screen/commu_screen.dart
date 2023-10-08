@@ -45,7 +45,7 @@ void displayEndDrawer(BuildContext context){
           )
         ],
       ),
-      drawer: const CommuListDrawer(),
+      drawer: const CommunityListDrawer(),
       endDrawer: const ProfileDrawer(),
       );
   }

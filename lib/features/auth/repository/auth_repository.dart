@@ -50,7 +50,7 @@ class AuthRepository {
        userModel = UserModel(
         name: userCredential.user!.displayName ?? 'noname',
         email: userCredential.user!.email ?? '',
-        profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
+        profilePic: Constants.avatarDefault,
         uid: userCredential.user!.uid,
       );
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/core/constants/constants.dart';
+import 'package:syncoplan_project/core/widgets/button.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
-import 'package:syncoplan_project/core/widgets/signin_button.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
 
 

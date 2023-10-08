@@ -22,6 +22,7 @@ class Apptheme {
         fontFamily: GoogleFonts.notoSansThai().fontFamily,
         hintColor: Colors.black45,
         appBarTheme: const AppBarTheme(
+          actionsIconTheme:IconThemeData(color:Colors.white),
           backgroundColor: Colors.black87,
           titleTextStyle: TextStyle(fontSize: 16),
           iconTheme:IconThemeData(

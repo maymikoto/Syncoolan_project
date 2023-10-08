@@ -6,6 +6,8 @@ import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
+import 'package:syncoplan_project/features/post/screens/add_post.dart';
+import 'package:syncoplan_project/features/post/screens/feed_screen.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String id;
@@ -102,6 +104,7 @@ class CommunityScreen extends ConsumerWidget {
                               ),
                             ),
                             const TabBar(
+                            labelColor:  Colors.black87,
                           tabs: [
                           Tab(text: 'Tab 1'), // Replace with your tab names
                           Tab(text: 'Tab 2'), // Replace with your tab names
@@ -113,16 +116,10 @@ class CommunityScreen extends ConsumerWidget {
                     ),
                   ];
                 },
-                body: const TabBarView(
+                body: TabBarView(
                   children: [
-                    // Content for Tab 1
-                    Center(
-                      child: Text('Tab 1 Content'), // Replace with your content
-                    ),
-                    // Content for Tab 2
-                    Center(
-                      child: Text('Tab 2 Content'), // Replace with your content
-                    ),
+                    const FeedScreen(),
+                          AddPostScreen()
                   ],
                 ),
               ),
@@ -130,6 +127,12 @@ class CommunityScreen extends ConsumerWidget {
             error: (error, stackTrace) => ErrorText(error: error.toString()),
             loading: () => const Loader(),
           ),
+          floatingActionButton: FloatingActionButton(
+        onPressed: (){},
+        child: Icon(Icons.add_box),
+        backgroundColor: Colors.green,
+
+      ),
     );
   }
 }
