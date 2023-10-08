@@ -130,5 +130,6 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
           loading: () => const Loader(),
           error: (error, stackTrace) => ErrorText(error: error.toString()),
         );
+    
   }
 }
