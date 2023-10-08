@@ -18,6 +18,11 @@ void navigateToCommunity(BuildContext context, String commuid) {
       Routemaster.of(context).push('/r/$commuid');
     }
 
+  void navigateToEditUser(BuildContext context) {
+    Routemaster.of(context).push('/edit-profile/$uid');
+  }
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -57,17 +62,15 @@ void navigateToCommunity(BuildContext context, String commuid) {
               CustomIconTextButton(
                 text: 'Edit Profile',
                 icon: Icons.edit,
-                onPressed: () {},
+                onPressed: () => navigateToEditUser(context),
               ),
               const SizedBox(height: 30),
               const Divider(height: 1.0,thickness:0.5,color:Colors.black26,),
               const SizedBox(height: 10),
-                  //const SizedBox(height:10),
                   const ListTile(
                       leading:Icon(Icons.group,color:Colors.black,),
                       title:Text("Groups you've joined", style:TextStyle(fontWeight: FontWeight.w600)) ,
                   ),
-                  //const SizedBox(height: 30),
               ref.watch(userCommunitiesProvider).when(
                 data: (communities) {
                   return  communities.isNotEmpty? ListView.builder(

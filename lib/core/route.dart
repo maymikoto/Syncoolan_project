@@ -9,6 +9,7 @@ import 'package:syncoplan_project/features/community/screen/edit_commu.dart';
 import 'package:syncoplan_project/features/community/screen/mod_tools_screen.dart';
 import 'package:syncoplan_project/features/post/screens/add_post.dart';
 import 'package:syncoplan_project/features/post/screens/add_post_type_screen.dart';
+import 'package:syncoplan_project/features/user_profile/edit_user_profile.dart';
 import 'package:syncoplan_project/features/user_profile/screens/user_profile_screen.dart';
 
 final loggedOutRoute = RouteMap(routes: {
@@ -41,6 +42,11 @@ final loggedInRoute = RouteMap(routes: {
             uid: routeData.pathParameters['uid']!,
           ),
         ),
+    '/edit-profile/:uid': (routeData) => MaterialPage(
+          child: EditProfileScreen(
+            uid: routeData.pathParameters['uid']!,
+          ),
+        ),
    '/add-post': (route) =>  const MaterialPage(
           child: AddPostScreen(),
         ),
@@ -48,5 +54,5 @@ final loggedInRoute = RouteMap(routes: {
           child: AddModsScreen(
             id: routeData.pathParameters['id']!,
           ),
-        ),               
+      ),               
 });
