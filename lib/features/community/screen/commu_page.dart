@@ -17,6 +17,10 @@ class CommunityScreen extends ConsumerWidget {
     Routemaster.of(context).push('/mod-tools/$id');
   }
 
+  void navigateToAddPost (BuildContext context) {
+    Routemaster.of(context).push('/add-post/$id');
+  }
+
   void joinCommunity(WidgetRef ref, Community community, BuildContext context) async {
     ref.read(communityControllerProvider.notifier).joinCommunity(community, context);
   }
@@ -119,7 +123,7 @@ class CommunityScreen extends ConsumerWidget {
                 body: TabBarView(
                   children: [
                     const FeedScreen(),
-                          AddPostScreen()
+                    const FeedScreen(),
                   ],
                 ),
               ),
@@ -128,9 +132,9 @@ class CommunityScreen extends ConsumerWidget {
             loading: () => const Loader(),
           ),
           floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.add_box),
+        onPressed:() => navigateToAddPost(context) ,
         backgroundColor: Colors.green,
+        child: Icon(Icons.add_box),
 
       ),
     );

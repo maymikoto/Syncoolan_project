@@ -9,13 +9,14 @@ import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart
 import 'package:syncoplan_project/theme/theme.dart';
 
 class AddPostScreen extends ConsumerWidget {
-  
-   const AddPostScreen({super.key});
+ final String id;
+  const AddPostScreen({ required this.id, super.key});
 
+/*
   void navigateToType(BuildContext context,String type){
     Routemaster.of(context).push('/add-post/$type');
   }
-
+*/
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
