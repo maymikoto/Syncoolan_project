@@ -1,6 +1,7 @@
 
 
-import 'package:syncoplan_project/features/community/screen/commu_screen.dart';
+import 'package:syncoplan_project/core/widgets/bottom_nav_bar.dart';
+import 'package:syncoplan_project/features/home/screens/home_screen.dart';
 import 'package:syncoplan_project/features/user_profile/screens/user_profile_screen.dart';
 
 class Constants {

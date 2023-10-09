@@ -3,7 +3,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/features/auth/screens/loginscreen.dart';
 import 'package:syncoplan_project/features/community/screen/add_mods_screen.dart';
 import 'package:syncoplan_project/features/community/screen/commu_page.dart';
-import 'package:syncoplan_project/features/community/screen/commu_screen.dart';
+import 'package:syncoplan_project/core/widgets/bottom_nav_bar.dart';
 import 'package:syncoplan_project/features/community/screen/create_commu_screen.dart';
 import 'package:syncoplan_project/features/community/screen/edit_commu.dart';
 import 'package:syncoplan_project/features/community/screen/mod_tools_screen.dart';
@@ -17,7 +17,7 @@ final loggedOutRoute = RouteMap(routes: {
 });
 
 final loggedInRoute = RouteMap(routes: {
-  '/' : (_) => const MaterialPage(child: HomeScreen()),
+  '/' : (_) => const MaterialPage(child: BottomNavBar()),
   '/create-community': (_) => const MaterialPage(child: CreateCommunityScreen()),
   '/r/:id': (route) => MaterialPage(
       child: CommunityScreen(
