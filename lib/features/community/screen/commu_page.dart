@@ -6,7 +6,6 @@ import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
-import 'package:syncoplan_project/features/post/screens/add_post.dart';
 import 'package:syncoplan_project/features/post/screens/feed_screen.dart';
 
 class CommunityScreen extends ConsumerWidget {
@@ -120,10 +119,10 @@ class CommunityScreen extends ConsumerWidget {
                     ),
                   ];
                 },
-                body: TabBarView(
+                body: const TabBarView(
                   children: [
-                    const FeedScreen(),
-                    const FeedScreen(),
+                    FeedScreen(),
+                    FeedScreen(),
                   ],
                 ),
               ),
@@ -134,7 +133,7 @@ class CommunityScreen extends ConsumerWidget {
           floatingActionButton: FloatingActionButton(
         onPressed:() => navigateToAddPost(context) ,
         backgroundColor: Colors.green,
-        child: Icon(Icons.add_box),
+        child: const Icon(Icons.add_box),
 
       ),
     );
