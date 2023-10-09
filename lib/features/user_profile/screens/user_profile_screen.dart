@@ -11,14 +11,13 @@ import 'package:syncoplan_project/theme/theme.dart';
 import 'package:line_icons/line_icons.dart';
 
 class UserProfileScreen extends ConsumerWidget {
-  final String uid;
-  const UserProfileScreen({Key? key, required this.uid}) : super(key: key);
+  const UserProfileScreen({Key? key}) : super(key: key);
 
 void navigateToCommunity(BuildContext context, String commuid) {
       Routemaster.of(context).push('/r/$commuid');
     }
 
-  void navigateToEditUser(BuildContext context) {
+  void navigateToEditUser(BuildContext context,String uid) {
     Routemaster.of(context).push('/edit-profile/$uid');
   }
 
@@ -26,12 +25,8 @@ void navigateToCommunity(BuildContext context, String commuid) {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-
+    final  uid = user.uid;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Profile'),
-        centerTitle: true,
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(18),
@@ -62,7 +57,7 @@ void navigateToCommunity(BuildContext context, String commuid) {
               CustomIconTextButton(
                 text: 'Edit Profile',
                 icon: Icons.edit,
-                onPressed: () => navigateToEditUser(context),
+                onPressed: () => navigateToEditUser(context,uid),
               ),
               const SizedBox(height: 30),
               const Divider(height: 1.0,thickness:0.5,color:Colors.black26,),

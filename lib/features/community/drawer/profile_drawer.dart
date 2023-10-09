@@ -10,10 +10,10 @@ class ProfileDrawer extends ConsumerWidget {
 void logOut(WidgetRef ref){
   ref.read(AuthControllerProvider.notifier).logOut();
 }
-void navigateToUserProfile(BuildContext context, String uid) {
-    Routemaster.of(context).push('/u/$uid');
+void navigateToUserProfile(BuildContext context) {
+    Routemaster.of(context).push('/profile');
   }
-  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
@@ -33,7 +33,7 @@ void navigateToUserProfile(BuildContext context, String uid) {
             ListTile(
                 title: const Text('My Profile'),
                 leading: const Icon(Icons.person,color: Colors.black,),
-                onTap:() => navigateToUserProfile(context, user.uid),
+                onTap:() => navigateToUserProfile(context),
            ),
             ListTile(
                 title: const Text('Log Out'),
