@@ -8,7 +8,7 @@ import 'package:syncoplan_project/features/community/screen/create_commu_screen.
 import 'package:syncoplan_project/features/community/screen/edit_commu.dart';
 import 'package:syncoplan_project/features/community/screen/mod_tools_screen.dart';
 import 'package:syncoplan_project/features/post/screens/add_post.dart';
-import 'package:syncoplan_project/features/user_profile/edit_user_profile.dart';
+import 'package:syncoplan_project/features/user_profile/screens/edit_user_profile.dart';
 import 'package:syncoplan_project/features/user_profile/screens/user_profile_screen.dart';
 
 final loggedOutRoute = RouteMap(routes: {

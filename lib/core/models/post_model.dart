@@ -3,18 +3,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
-class PostModel {
+class Post {
   String postId;          // Unique Identifier
   String authorId;        // User ID
   String communityId;     // Community ID
   String content;         // Post Content
   DateTime postDate;      // Post Date
   List<String> likes;     // List of User IDs who liked the post
-  List<String> comments;  // List of Comment IDs
+  List<String> comments;// List of Comment IDs
   String linkedEventId;   // Identifier or reference to the related schedule event (optional)
   List<String> imageUrls; // List of URLs to images attached to the post (optional)       // URL link associated with the post (optional)
   
-  PostModel({
+  Post({
     String? postId,
     required this.authorId,
     required this.communityId,
@@ -26,7 +26,7 @@ class PostModel {
     required this.imageUrls,
   }): postId = postId ?? const Uuid().v4(); 
 
-  PostModel copyWith({
+  Post copyWith({
     String? postId,
     String? authorId,
     String? communityId,
@@ -37,7 +37,7 @@ class PostModel {
     String? linkedEventId,
     List<String>? imageUrls,
   }) {
-    return PostModel(
+    return Post(
       postId: postId ?? this.postId,
       authorId: authorId ?? this.authorId,
       communityId: communityId ?? this.communityId,
@@ -64,8 +64,8 @@ class PostModel {
     };
   }
 
-  factory PostModel.fromMap(Map<String, dynamic> map) {
-    return PostModel(
+  factory Post.fromMap(Map<String, dynamic> map) {
+    return Post(
       postId: map['postId'] ?? '' ,
       authorId: map['authorId'] ?? '',
       communityId: map['communityId'] ?? '' ,
@@ -84,7 +84,7 @@ class PostModel {
   }
 
   @override
-  bool operator ==(covariant PostModel other) {
+  bool operator ==(covariant Post other) {
     if (identical(this, other)) return true;
   
     return 
