@@ -6,7 +6,7 @@ import 'package:syncoplan_project/features/user_profile/screens/user_profile_scr
 
 class Constants {
   static const logoPath = 'lib/assets/logo.png';
-  static const loginEmotePath = 'lib/assets/loginEmote.png';
+  static const loginEmotePath = 'lib/assets/Syncoplanlogo.png';
   static const googlePath = 'lib/assets/google.png';
 
   static const bannerDefault =

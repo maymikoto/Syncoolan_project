@@ -136,7 +136,7 @@ IconButton(
         endTime != null &&
         eventColor != null &&
         cid.isNotEmpty) {
-      ref.read(eventControllerProvider.notifier).createEvent(
+        ref.read(eventControllerProvider.notifier).createEvent(
         name,
         description,
         cid,

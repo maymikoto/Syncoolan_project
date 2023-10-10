@@ -6,6 +6,7 @@ import 'package:syncoplan_project/core/models/event_model.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
+import 'package:syncoplan_project/features/calendar/screens/event_detail.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
 import 'package:syncoplan_project/features/calendar/controller/event_controller.dart';
 
@@ -42,10 +43,18 @@ class CalendarScreen extends ConsumerWidget {
     );
   }
 }
-
 class CalendarWithEvents extends ConsumerWidget {
   final String id;
   CalendarWithEvents({required this.id, super.key});
+
+  void navigateToEventDetail(BuildContext context, EventModel event) {
+    // Navigate to the event detail page and pass the event data
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EventDetailPage(event: event),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -68,6 +77,26 @@ class CalendarWithEvents extends ConsumerWidget {
         return SfCalendar(
           view: CalendarView.month,
           dataSource: EventDataSource(calendarEvents),
+          onTap: (calendarTapDetails) {
+            if (calendarTapDetails.targetElement == CalendarElement.calendarCell) {
+              // You pressed on a date cell in the calendar
+              final DateTime? selectedDate = calendarTapDetails.date;
+
+              if (selectedDate != null) { // Check if selectedDate is not null
+                // You can then filter events based on the selected date and navigate to the event detail page
+                final selectedEvents = eventList.where((event) =>
+                  event.eventDate.year == selectedDate.year &&
+                  event.eventDate.month == selectedDate.month &&
+                  event.eventDate.day == selectedDate.day,
+                ).toList();
+
+                if (selectedEvents.isNotEmpty) {
+                  // Assuming you want to navigate to the detail page for the first event on the selected date
+                  navigateToEventDetail(context, selectedEvents.first);
+                }
+              }
+            }
+          },
         );
       },
       loading: () => const Loader(),
