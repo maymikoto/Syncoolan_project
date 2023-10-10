@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/features/auth/screens/loginscreen.dart';
+import 'package:syncoplan_project/features/calendar/screens/add_calendar_screen.dart';
 import 'package:syncoplan_project/features/community/screen/add_mods_screen.dart';
 import 'package:syncoplan_project/features/community/screen/commu_page.dart';
 import 'package:syncoplan_project/core/widgets/bottom_nav_bar.dart';
@@ -49,9 +50,10 @@ final loggedInRoute = RouteMap(routes: {
             id: routeData.pathParameters['id']!,
           ),
         ),
-  /*  '/add-post/:type': (routeData) => MaterialPage(
-          child: AddModsScreen(
+  '/add-event/:id': (routeData) => MaterialPage(
+          child: AddCalendarScreen(
             id: routeData.pathParameters['id']!,
           ),
-      ),   */            
+      ),           
 });
+

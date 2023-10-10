@@ -1,50 +1,59 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
+// import statements for necessary packages
 
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class EventModel {
   String eventId;           // Unique Identifier for the event
-  String eventName;         // Name or title of the event
-  String eventDescription;  // Description of the event
-  DateTime eventDate;      // Date of the event
-  DateTime eventTime;     // Time of the event
-  String eventColor;        // Color associated with the event
-  String communityId;      // ID of the community to which the event belongs
-  String creatorUserId; 
-
+  String eventName;
+  String eventDescription;
+  DateTime eventDate;
+  TimeOfDay startTime;
+  TimeOfDay endTime;
+  Color eventColor;        // Color associated with the event
+  String communityId;     
+  String communityName;     // ID of the community to which the event belongs
+  String creatorUserId;
+  String creatorUsername; 
 
   EventModel({
-    String? eventId,
+    required this.eventId,
     required this.eventName,
     required this.eventDescription,
     required this.eventDate,
-    required this.eventTime,
+    required this.startTime,
+    required this.endTime,
     required this.eventColor,
     required this.communityId,
+    required this.communityName,
     required this.creatorUserId,
-  }): eventId = eventId ?? const Uuid().v4(); 
+    required this.creatorUsername,
+  });
 
   EventModel copyWith({
     String? eventId,
     String? eventName,
     String? eventDescription,
     DateTime? eventDate,
-    DateTime? eventTime,
-    String? eventColor,
+    TimeOfDay? startTime,
+    TimeOfDay? endTime,
+    Color? eventColor,
     String? communityId,
+    String? communityName,
     String? creatorUserId,
+    String? creatorUsername,
   }) {
     return EventModel(
       eventId: eventId ?? this.eventId,
       eventName: eventName ?? this.eventName,
       eventDescription: eventDescription ?? this.eventDescription,
       eventDate: eventDate ?? this.eventDate,
-      eventTime: eventTime ?? this.eventTime,
+      startTime: startTime ?? this.startTime,
+      endTime: endTime ?? this.endTime,
       eventColor: eventColor ?? this.eventColor,
       communityId: communityId ?? this.communityId,
+      communityName: communityName ?? this.communityName,
       creatorUserId: creatorUserId ?? this.creatorUserId,
+      creatorUsername: creatorUsername ?? this.creatorUsername,
     );
   }
 
@@ -54,10 +63,15 @@ class EventModel {
       'eventName': eventName,
       'eventDescription': eventDescription,
       'eventDate': eventDate.millisecondsSinceEpoch,
-      'eventTime': eventTime.millisecondsSinceEpoch,
-      'eventColor': eventColor,
+      'startTimeHour': startTime.hour,
+      'startTimeMinute': startTime.minute,
+      'endTimeHour': endTime.hour,
+      'endTimeMinute': endTime.minute,
+      'eventColor': eventColor.value,
       'communityId': communityId,
+      'communityName': communityName,
       'creatorUserId': creatorUserId,
+      'creatorUsername': creatorUsername,
     };
   }
 
@@ -66,17 +80,27 @@ class EventModel {
       eventId: map['eventId'] ?? '',
       eventName: map['eventName'] ?? '',
       eventDescription: map['eventDescription'] ?? '',
-      eventDate: DateTime.fromMillisecondsSinceEpoch(map['eventDate'] ),
-      eventTime: DateTime.fromMillisecondsSinceEpoch(map['eventTime'] ),
-      eventColor: map['eventColor'] ?? '',
+      eventDate: DateTime.fromMillisecondsSinceEpoch(map['eventDate'] as int),
+      startTime: TimeOfDay(
+        hour: map['startTimeHour'] as int,
+        minute: map['startTimeMinute'] as int,
+      ),
+      endTime: TimeOfDay(
+        hour: map['endTimeHour'] as int,
+        minute: map['endTimeMinute'] as int,
+      ),
+      eventColor: Color(map['eventColor'] as int),
       communityId: map['communityId'] ?? '',
+      communityName: map['communityName'] ?? '',
       creatorUserId: map['creatorUserId'] ?? '',
+      creatorUsername: map['creatorUsername'] ?? '',
     );
   }
 
+
   @override
   String toString() {
-    return 'EventModel(eventId: $eventId, eventName: $eventName, eventDescription: $eventDescription, eventDate: $eventDate, eventTime: $eventTime, eventColor: $eventColor, communityId: $communityId, creatorUserId: $creatorUserId)';
+    return 'EventModel(eventId: $eventId, eventName: $eventName, eventDescription: $eventDescription, eventDate: $eventDate, startTime: $startTime, endTime: $endTime, eventColor: $eventColor, communityId: $communityId, communityName: $communityName, creatorUserId: $creatorUserId, creatorUsername: $creatorUsername)';
   }
 
   @override
@@ -88,10 +112,13 @@ class EventModel {
       other.eventName == eventName &&
       other.eventDescription == eventDescription &&
       other.eventDate == eventDate &&
-      other.eventTime == eventTime &&
+      other.startTime == startTime &&
+      other.endTime == endTime &&
       other.eventColor == eventColor &&
       other.communityId == communityId &&
-      other.creatorUserId == creatorUserId;
+      other.communityName == communityName &&
+      other.creatorUserId == creatorUserId &&
+      other.creatorUsername == creatorUsername;
   }
 
   @override
@@ -100,9 +127,12 @@ class EventModel {
       eventName.hashCode ^
       eventDescription.hashCode ^
       eventDate.hashCode ^
-      eventTime.hashCode ^
+      startTime.hashCode ^
+      endTime.hashCode ^
       eventColor.hashCode ^
       communityId.hashCode ^
-      creatorUserId.hashCode;
+      communityName.hashCode ^
+      creatorUserId.hashCode ^
+      creatorUsername.hashCode;
   }
 }

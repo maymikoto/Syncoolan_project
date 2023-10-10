@@ -25,15 +25,13 @@ class StorageRepository {
     try {
       final ref = _firebaseStorage.ref().child(path).child(id);
       UploadTask uploadTask;
-
-
       uploadTask = ref.putFile(file!);
-
       final snapshot = await uploadTask;
-
       return right(await snapshot.ref.getDownloadURL());
     } catch (e) {
       return left(Failure(e.toString()));
     }
   }
+
+  storeEventImage({required String path, required String id, required file}) {}
 }

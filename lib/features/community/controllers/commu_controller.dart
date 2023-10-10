@@ -7,10 +7,16 @@ import 'package:routemaster/routemaster.dart';
 import 'package:syncoplan_project/core/constants/constants.dart';
 import 'package:syncoplan_project/core/failure.dart';
 import 'package:syncoplan_project/core/models/commu_model.dart';
+import 'package:syncoplan_project/core/models/event_model.dart';
+import 'package:syncoplan_project/core/models/post_model.dart';
 import 'package:syncoplan_project/core/providers/storage_repository_provider.dart';
 import 'package:syncoplan_project/core/util.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
+import 'package:syncoplan_project/features/calendar/controller/event_controller.dart';
 import 'package:syncoplan_project/features/community/repository/commu_repository.dart';
+
+
+final communityProvider = StateProvider<Community?>((ref) => null);
 
 final userCommunitiesProvider = StreamProvider((ref) {
   final communityController = ref.watch(communityControllerProvider.notifier);
@@ -35,6 +41,17 @@ final getCommunityByIdProvider = StreamProvider.family((ref, String id) {
 final searchCommunityProvider = StreamProvider.family((ref, String query) {
   return ref.watch(communityControllerProvider.notifier).searchCommunity(query);
 });
+
+final getCommunityPostsProvider = StreamProvider.family((ref, String id) {
+  return ref.read(communityControllerProvider.notifier).getCommunityPosts(id);
+});
+
+final communityEventsProvider = StreamProvider.family<List<EventModel>, String>((ref, communityId) {
+  final eventController = ref.watch(eventControllerProvider.notifier);
+  return eventController.getCommunityEventsAsStream(communityId); // Use the new stream method
+});
+
+
 
 class CommunityController extends StateNotifier<bool>{
   final CommunityRepository _communityRepository;
@@ -165,8 +182,17 @@ void addMods(String communityid ,List<String> uids,BuildContext context) async{
     (r) => showSuccessSnackBar(context,'Mods updated successfully!'),);
 }
 
-
+  Stream<List<Post>> getCommunityPosts(String id) {
+    return _communityRepository.getCommunityPosts(id);
+  }
+  
+  Stream<List<EventModel>> getCommunityEvents(String communityId) {
+  return _communityRepository.getCommunityEvents(communityId);
 }
+
+  
+}
+
 
 
 

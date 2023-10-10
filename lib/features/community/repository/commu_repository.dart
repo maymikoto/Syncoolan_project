@@ -5,6 +5,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:syncoplan_project/core/constants/firebase_constants.dart';
 import 'package:syncoplan_project/core/failure.dart';
 import 'package:syncoplan_project/core/models/commu_model.dart';
+import 'package:syncoplan_project/core/models/event_model.dart';
+import 'package:syncoplan_project/core/models/post_model.dart';
 import 'package:syncoplan_project/core/providers/firebase_providers.dart';
 import 'package:syncoplan_project/core/type_defs.dart';
 
@@ -116,6 +118,30 @@ Stream<Community> getCommunityById(String id) {
       return communities;
     });
   }
-
+  Stream<List<Post>> getCommunityPosts(String id) {
+    return _posts.where('communityId', isEqualTo: id).orderBy('postDate', descending: true).snapshots().map(
+          (event) => event.docs
+              .map(
+                (e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
+  
+Stream<List<EventModel>> getCommunityEvents(String communityId) {
+  return _events
+      .where('communityId', isEqualTo: communityId)
+      .snapshots()
+      .map((querySnapshot) {
+    return querySnapshot.docs.map((doc) {
+      final eventData = doc.data() as Map<String, dynamic>;
+      return EventModel.fromMap(eventData);
+    }).toList();
+  });
+}
+  CollectionReference get _events => _firestore.collection(FirebaseConstants.postsCollection);
+  CollectionReference get _posts => _firestore.collection(FirebaseConstants.postsCollection);
   CollectionReference get _communities => _firestore.collection(FirebaseConstants.communitiesCollection);
 }
