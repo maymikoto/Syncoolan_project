@@ -46,11 +46,9 @@ final getCommunityPostsProvider = StreamProvider.family((ref, String id) {
   return ref.read(communityControllerProvider.notifier).getCommunityPosts(id);
 });
 
-final communityEventsProvider = StreamProvider.family<List<EventModel>, String>((ref, communityId) {
-  final eventController = ref.watch(eventControllerProvider.notifier);
-  return eventController.getCommunityEventsAsStream(communityId); // Use the new stream method
+final getCommunityEventProvider = StreamProvider.family((ref, String id) {
+  return ref.read(communityControllerProvider.notifier).getCommunityEvents(id);
 });
-
 
 
 class CommunityController extends StateNotifier<bool>{
@@ -187,7 +185,7 @@ void addMods(String communityid ,List<String> uids,BuildContext context) async{
   }
   
   Stream<List<EventModel>> getCommunityEvents(String communityId) {
-  return _communityRepository.getCommunityEvents(communityId);
+  return _communityRepository.getCommunityEvent(communityId);
 }
 
   

@@ -23,7 +23,8 @@ class AddCalendarScreen extends ConsumerStatefulWidget {
 final eventNameController = TextEditingController();
 final eventDescriptionController = TextEditingController();
 final eventDateController = TextEditingController();
-final eventTimeController = TextEditingController();
+final eventStartTimeController = TextEditingController();
+final eventEndTimeController = TextEditingController();
 Color _selectedColor = Colors.blue; // Set an initial color
 
 DateTime? firstDate;
@@ -58,26 +59,33 @@ class _AddCalendarScreenState extends ConsumerState<AddCalendarScreen> {
     }
   }
 
-  Future<void> _pickTime(BuildContext context) async {
-    final selectedTime = await showTimePicker(
-      context: context,
-      initialTime: _selectedStartTime!,
-    );
+Future<void> _pickTime(BuildContext context, TextEditingController controller) async {
+  final selectedTime = await showTimePicker(
+    context: context,
+    initialTime: controller == eventStartTimeController
+        ? _selectedStartTime
+        : _selectedEndTime,
+  );
 
-    if (selectedTime != null) {
-      setState(() {
+  if (selectedTime != null) {
+    setState(() {
+      if (controller == eventStartTimeController) {
         _selectedStartTime = selectedTime;
-        final selectedDateTime = DateTime(
-          _selectedDate!.year,
-          _selectedDate!.month,
-          _selectedDate!.day,
-          selectedTime.hour,
-          selectedTime.minute,
-        );
-        eventTimeController.text = DateFormat.jm().format(selectedDateTime);
-      });
-    }
+      } else {
+        _selectedEndTime = selectedTime;
+      }
+      final selectedDateTime = DateTime(
+        _selectedDate!.year,
+        _selectedDate!.month,
+        _selectedDate!.day,
+        selectedTime.hour,
+        selectedTime.minute,
+      );
+      controller.text = DateFormat.jm().format(selectedDateTime);
+    });
   }
+}
+
 
   Future<void> _pickEndTime(BuildContext context) async {
     final selectedTime = await showTimePicker(
@@ -188,8 +196,8 @@ IconButton(
                     _selectedStartTime!.minute,
                   ),
                 ),
-                controller: eventTimeController,
-                onCalendarIconTap: () => _pickTime(context),
+                controller:eventStartTimeController,
+                onCalendarIconTap: () => _pickTime(context,eventStartTimeController),
               ),
               const SizedBox(height: 20),
               CustomDateField(
@@ -204,7 +212,7 @@ IconButton(
                     _selectedEndTime!.minute,
                   ),
                 ),
-                controller: eventTimeController,
+                controller: eventEndTimeController,
                 onCalendarIconTap: () => _pickEndTime(context),
               ),
               const SizedBox(height: 20),

@@ -51,6 +51,7 @@ dependencies:
   syncfusion_flutter_calendar: ^23.1.39
   intl: ^0.18.1
   dartz: ^0.10.0
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   flutter_test:

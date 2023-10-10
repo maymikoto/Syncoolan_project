@@ -4,7 +4,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
-import 'package:syncoplan_project/features/calendar/screens/calendar_main.dart';
+import 'package:syncoplan_project/features/calendar/screens/calendar_screen.dart';
 import 'package:syncoplan_project/features/community/screen/commu_main_screen.dart';
 import 'package:syncoplan_project/features/community/screen/commu_page.dart';
 import 'package:syncoplan_project/features/home/screens/home_screen.dart';

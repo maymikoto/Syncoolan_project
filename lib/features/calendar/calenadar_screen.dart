@@ -6,12 +6,12 @@ import 'package:syncoplan_project/core/models/event_model.dart';
 import 'package:syncoplan_project/core/widgets/error_text.dart';
 import 'package:syncoplan_project/core/widgets/loader.dart';
 import 'package:syncoplan_project/features/auth/controllers/auth_controller.dart';
-import 'package:syncoplan_project/features/calendar/controller/event_controller.dart';
 import 'package:syncoplan_project/features/community/controllers/commu_controller.dart';
+import 'package:syncoplan_project/features/calendar/controller/event_controller.dart';
 
 class CalendarScreen extends ConsumerWidget {
   final String id;
-  const CalendarScreen({required this.id, Key? key}) : super(key: key);
+  CalendarScreen({required this.id, super.key});
 
   void navigateToAddEvent(BuildContext context) {
     Routemaster.of(context).push('/add-event/$id');
@@ -20,20 +20,13 @@ class CalendarScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider)!;
-    
-    // Use the event controller to fetch community events
-    final events = ref.watch(eventControllerProvider.notifier).getCommunityEventsAsStream(id);
-
-    // Create an instance of MyCalendarDataSource using the events stream
-    final dataSource = MyCalendarDataSource(events);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Calendar'),
+      ),
       body: SafeArea(
-        child: SfCalendar(
-          view: CalendarView.month,
-          monthViewSettings: MonthViewSettings(showAgenda: true),
-          dataSource: dataSource, // Use the new data source here
-        ),
+        child: CalendarWithEvents(id: id),
       ),
       floatingActionButton: ref.watch(getCommunityByIdProvider(id)).when(
         data: (community) => community.members.contains(user.uid)
@@ -50,8 +43,42 @@ class CalendarScreen extends ConsumerWidget {
   }
 }
 
-class MyCalendarDataSource extends CalendarDataSource {
-  final Stream<List<EventModel>> events; // Change the events type to Stream
+class CalendarWithEvents extends ConsumerWidget {
+  final String id;
+  CalendarWithEvents({required this.id, super.key});
 
-  MyCalendarDataSource(this.events);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Fetch events for the community with the given id
+    final AsyncValue<List<EventModel>> events = ref.watch(getCommunityEventProvider(id));
+
+    return events.when(
+      data: (eventList) {
+        print("Events: $eventList"); // Add this debug print statement
+
+        final calendarEvents = eventList.map((event) {
+          return Appointment(
+            startTime: DateTime(event.eventDate.year, event.eventDate.month, event.eventDate.day, event.startTime.hour, event.startTime.minute),
+            endTime: DateTime(event.eventDate.year, event.eventDate.month, event.eventDate.day, event.endTime.hour, event.endTime.minute),
+            subject: event.eventName,
+            color: event.eventColor,
+          );
+        }).toList();
+
+        return SfCalendar(
+          view: CalendarView.month,
+          dataSource: EventDataSource(calendarEvents),
+        );
+      },
+      loading: () => const Loader(),
+      error: (error, stackTrace) => ErrorText(error: error.toString()),
+    );
+  }
+}
+
+
+class EventDataSource extends CalendarDataSource {
+  EventDataSource(List<Appointment> appointments) {
+    this.appointments = appointments;
+  }
 }

@@ -130,9 +130,21 @@ Stream<Community> getCommunityById(String id) {
         );
   }
   
-Stream<List<EventModel>> getCommunityEvents(String communityId) {
+  Stream<List<EventModel>> getCommunityEvent(String id) {
+    return _events.where('communityId', isEqualTo: id).snapshots().map(
+          (events) => events.docs
+              .map(
+                (e) => EventModel.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ),
+              )
+              .toList(),
+        );
+  }
+
+Stream<List<EventModel>> getCommunityEvents(String id) {
   return _events
-      .where('communityId', isEqualTo: communityId)
+      .where('communityId', isEqualTo: id)
       .snapshots()
       .map((querySnapshot) {
     return querySnapshot.docs.map((doc) {
@@ -141,7 +153,8 @@ Stream<List<EventModel>> getCommunityEvents(String communityId) {
     }).toList();
   });
 }
-  CollectionReference get _events => _firestore.collection(FirebaseConstants.postsCollection);
+
+  CollectionReference get _events => _firestore.collection(FirebaseConstants.eventsCollection);
   CollectionReference get _posts => _firestore.collection(FirebaseConstants.postsCollection);
   CollectionReference get _communities => _firestore.collection(FirebaseConstants.communitiesCollection);
 }

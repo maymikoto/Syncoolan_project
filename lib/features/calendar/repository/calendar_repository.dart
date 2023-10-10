@@ -1,3 +1,4 @@
+/*
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -106,5 +107,68 @@ class EventRepository {
     } catch (e) {
       return left(Failure(e.toString()));
     }
+  }
+}
+*/
+
+// event_repository.dart
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:syncoplan_project/core/failure.dart';
+import 'package:syncoplan_project/core/models/event_model.dart';
+import 'package:syncoplan_project/core/providers/firebase_providers.dart';
+import 'package:syncoplan_project/core/type_defs.dart';
+
+final eventRepositoryProvider = Provider((ref) {
+  return EventRepository(firestore: ref.watch(firestoreProvider));
+});
+
+class EventRepository {
+  final FirebaseFirestore _firestore;
+
+  EventRepository({required FirebaseFirestore firestore}) : _firestore = firestore;
+
+  FutureVoid createEvent(EventModel event, String communityId) async {
+    try {
+      return right(await _firestore.collection('events').doc(communityId).collection('events').add(event.toMap()));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  FutureVoid deleteEvent(String eventId, String communityId) async {
+    try {
+      return right(await _firestore.collection('events').doc(communityId).collection('events').doc(eventId).delete());
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
+
+  Stream<List<EventModel>> getEventsForUserGroups(String userId) {
+    return _firestore.collection('events').where('members', arrayContains: userId).snapshots().map((event) {
+      List<EventModel> events = [];
+      for (var doc in event.docs) {
+        events.add(EventModel.fromMap(doc.data() as Map<String, dynamic>));
+      }
+      return events;
+    });
+  }
+
+  Stream<List<EventModel>> getEventsInCommunity(String communityId) {
+    return _firestore.collection('events').doc(communityId).collection('events').snapshots().map((event) {
+      List<EventModel> events = [];
+      for (var doc in event.docs) {
+        events.add(EventModel.fromMap(doc.data() as Map<String, dynamic>));
+      }
+      return events;
+    });
   }
 }
