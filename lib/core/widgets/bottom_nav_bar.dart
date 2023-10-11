@@ -21,7 +21,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
   int _page = 0;
 
   static const tabWidgets = [
-    HomeScreen(),
+
     CommunityHomeScreen(),
     CaledndarScreen(),
     UserProfileScreen(),
@@ -44,14 +44,14 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
         backgroundColor: Colors.white,
         height: 60,
         items: const [
-          CurvedNavigationBarItem(
+         /* CurvedNavigationBarItem(
             child: Icon(
               EvaIcons.home,
               color: Colors.white,
             ),
             label: 'Home',
             labelStyle: TextStyle(color: Colors.white, fontSize: 10),
-          ),
+          ),*/
           CurvedNavigationBarItem(
             child: Icon(
               Icons.people_alt,
