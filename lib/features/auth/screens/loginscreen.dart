@@ -13,9 +13,11 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context,WidgetRef ref) {
     final isLoading = ref.watch(AuthControllerProvider);
     return  Scaffold(
+      backgroundColor: Colors.black,
       body: isLoading 
         ? const Loader()  
         : SafeArea(
+        
         child: Column(
           children: [
             const SizedBox(height: 30),

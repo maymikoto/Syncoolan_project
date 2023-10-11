@@ -125,7 +125,7 @@ late TextEditingController _postController = TextEditingController();
                   onTap:selectPostImage,
                 ),
               ),
-              Container(
+           /*   Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -136,7 +136,7 @@ late TextEditingController _postController = TextEditingController();
                   title: Text("Link To Event", style: TextStyle(fontSize: 16, color: Colors.blue.shade600, fontWeight: FontWeight.w600),),
                   onTap: () {},
                 ),
-              ),
+              ),*/
             ],
           ),
         ),

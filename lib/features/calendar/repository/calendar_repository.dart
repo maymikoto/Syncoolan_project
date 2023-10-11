@@ -119,6 +119,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:syncoplan_project/core/constants/firebase_constants.dart';
 import 'package:syncoplan_project/core/failure.dart';
+import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/models/event_model.dart';
 import 'package:syncoplan_project/core/providers/firebase_providers.dart';
 import 'package:syncoplan_project/core/type_defs.dart';
@@ -148,9 +149,9 @@ class EventRepository {
     }
   }
 
- Stream<List<EventModel>> fetchUserEvents(List<EventModel> communities) {
+ Stream<List<EventModel>> fetchUserEvents(List<Community> communities) {
     return _events
-        .where('communityId', whereIn: communities.map((e) => e.communityId).toList())
+        .where('communityId', whereIn: communities.map((e) => e.id).toList())
         .snapshots()
         .map(
           (event) => event.docs

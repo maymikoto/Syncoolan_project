@@ -40,7 +40,7 @@ class _BottomNavBarState extends ConsumerState<BottomNavBar> {
     return Scaffold(
       body: tabWidgets[_page],
       bottomNavigationBar: CurvedNavigationBar(
-        color: Colors.deepPurple.shade200,
+        color: Colors.black87,
         backgroundColor: Colors.white,
         height: 60,
         items: const [

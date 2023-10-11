@@ -1,3 +1,4 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncoplan_project/core/models/post_model.dart';
@@ -26,21 +27,30 @@ class PostCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Use AsyncValue<UserModel> to get user data
     final userAsyncValue = ref.watch(getUserDataProvider(post.authorId));
-    
-    // Check the state of AsyncValue
+    final user = ref.watch(userProvider)!;
+    // Check the state of AsyncValues
     return userAsyncValue.when(
       data: (user) {
-        // User data is available, you can access properties like profilePic
         return Card(
           margin: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(user.profilePic), // Access profilePic here
-                ),
-                title: Text(user.name),
+            children: [
+
+              Row(
+                children: [
+                  SizedBox(width: 20,),
+                  CircleAvatar(
+                      backgroundImage: NetworkImage(user.profilePic),
+                    ),
+                    SizedBox(width: 10,),
+                    Text(user.name),
+                  Spacer(),
+
+                  post.authorId == user.uid ?
+                    IconButton(onPressed: () { deletePost(ref, context);}, icon:const Icon(EvaIcons.trash2Outline ,color:Colors.red,))  
+                    : SizedBox(width: 1,)         
+                  ],        
               ),
               const Divider(),
               Padding(
@@ -59,21 +69,7 @@ class PostCard extends ConsumerWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.favorite),
-                    label: const Text('Love'),
-                  ),
-                  ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(Icons.comment),
-                    label: const Text('Comment'),
-                  ),
-                ],
-              ),
+              SizedBox(height:20)
             ],
           ),
         );

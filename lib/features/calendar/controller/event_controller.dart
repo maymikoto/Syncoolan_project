@@ -234,6 +234,7 @@ Future<List<EventModel>> fetchEvents() async {
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
+import 'package:syncoplan_project/core/models/commu_model.dart';
 import 'package:syncoplan_project/core/models/event_model.dart';
 import 'package:syncoplan_project/core/providers/storage_repository_provider.dart';
 import 'package:syncoplan_project/core/util.dart';
@@ -254,7 +255,7 @@ final eventControllerProvider = StateNotifierProvider<EventController, bool>((re
   );
 });
 
-final userEventProvider = StreamProvider.family<List<EventModel>, List<EventModel>>((ref, communities) {
+final userEventProvider = StreamProvider.family((ref, List<Community> communities){
   final eventController = ref.watch(eventControllerProvider.notifier);
   return eventController.fetchUserEvents(communities);
 });
@@ -263,6 +264,7 @@ final getEventByIdProvider = StreamProvider.family<EventModel, String>((ref, eve
   final eventController = ref.watch(eventControllerProvider.notifier);
   return eventController.getEventById(eventId);
 });
+
 
 
 class EventController extends StateNotifier<bool> {
@@ -315,7 +317,7 @@ class EventController extends StateNotifier<bool> {
       });
     }
 
-  Stream<List<EventModel>> fetchUserEvents(List<EventModel> communities) {
+  Stream<List<EventModel>> fetchUserEvents(List<Community> communities) {
     if (communities.isNotEmpty) {
       return _eventRepository.fetchUserEvents(communities);
     }
@@ -325,8 +327,14 @@ class EventController extends StateNotifier<bool> {
  void deleteEvent(EventModel event, BuildContext context) async {
     final res = await _eventRepository.deleteEvent(event);
     _ref.read(userProfileControllerProvider.notifier);
-    res.fold((l) => null, (r) => showSuccessSnackBar(context, 'Event Deleted successfully!'));
+    res.fold((l) => null, (r) {
+        showSuccessSnackBar(context, 'Delete Event successfully!');
+        Routemaster.of(context).pop();
+      });
   }
+
+
+  
   Stream<EventModel> getEventById(String postId) {
     return _eventRepository.getEventById(postId);
   }

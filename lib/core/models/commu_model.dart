@@ -23,6 +23,7 @@ class Community {
     String? id,
     String? name,
     String? banner,
+    
     String? avatar,
     List<String>? members,
     List<String>? mods,
